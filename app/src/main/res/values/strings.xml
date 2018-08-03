@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sudokur</string>
+
+    <string name="btn_thinking">Thinking</string>
+</resources>
