@@ -38,25 +38,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        for (int column = 0; column < temp.length; column++) {
+            for (int row = 0; row < temp[column].length; row++) {
+                Data data = new Data();
+                data.answer = temp[column][row];
+                if (data.answer != 0) {
+                    data.isFixed = true;
+                }
+                board[column][row] = data;
+            }
+        }
+        Log.d(this.getClass().getName(), "-");
+        for (int column = 0; column < board.length; column++) {
+            StringBuilder line = new StringBuilder();
+            for (int row = 0; row < board[column].length; row++) {
+                line.append(board[column][row].isFixed ? board[column][row].answer : " ").append(" ");
+                if (!board[column][row].isFixed) {
+                    board[column][row].hint = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                }
+            }
+            Log.d(this.getClass().getName(), line.toString());
+        }
+
         this.findViewById(R.id.btn_thinking).setOnClickListener((v) -> {
-            for (int column = 0; column < temp.length; column++) {
-                for (int row = 0; row < temp[column].length; row++) {
-                    Data data = new Data();
-                    data.answer = temp[column][row];
-                    if (data.answer != 0) {
-                        data.isFixed = true;
-                    }
-                    board[column][row] = data;
-                }
-            }
-            Log.d(this.getClass().getName(), "-");
             for (int column = 0; column < board.length; column++) {
-                StringBuilder line = new StringBuilder();
                 for (int row = 0; row < board[column].length; row++) {
-                    line.append(board[column][row].isFixed ? board[column][row].answer : " ").append(" ");
+                    if (board[column][row].isFixed) {
+                        int number = board[column][row].answer;
+                        int columnStart = column - (column % 3);
+                        int rowStart = row - (row % 3);
+
+                        for (int subCol = columnStart; subCol < columnStart + 3; subCol++) {
+                            for (int subRow = rowStart; subRow < rowStart + 3; subRow++) {
+                                board[subCol][subRow].hint[number - 1] = 0;
+                            }
+                        }
+                        for (int subRow = 0; subRow < BOARD_ROW; subRow++) {
+                            board[column][subRow].hint[number - 1] = 0;
+                        }
+                        for (int subCol = 0; subCol < BOARD_COLUMN; subCol++) {
+                            board[subCol][row].hint[number - 1] = 0;
+                        }
+                    }
                 }
-                Log.d(this.getClass().getName(), line.toString());
             }
+            Log.d("DEBUG", "STOP");
         });
     }
 }
