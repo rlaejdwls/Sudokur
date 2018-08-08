@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initialize();
+        updateHint();
         print();
 
         this.findViewById(R.id.btn_thinking).setOnClickListener((v) -> {
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public void thinking() {
         new Thread(() -> {
             while (true) {
-                updateHint();
-                if (algorithmOnlyOne()) break;
+                if (algorithmOnlyOneInsideBoard()/* && algorithmOnlyOneInsideBlock()*/) break;
                 if (checkSuccess()) break;
             }
             Log.d("DEBUG", "STOP");
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public boolean algorithmOnlyOne() {
+    public boolean algorithmOnlyOneInsideBoard() {
         for (int column = 0; column < board.length; column++) {
             for (int row = 0; row < board[column].length; row++) {
                 int count = 0;
@@ -109,7 +109,57 @@ public class MainActivity extends AppCompatActivity {
                             board[column][row].answer = board[column][row].hint[index];
                             board[column][row].isFixed = true;
                             board[column][row].hint = new int[]{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                            updateHint();
                             return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    public boolean algorithmOnlyOneInsideBlock() {
+        boolean result = true;
+        for (int column = 0; column < board.length; column++) {
+            for (int row = 0; row < board[column].length; row++) {
+                if (!board[column][row].isFixed) {
+                    for (int index = 0; index < board[column][row].hint.length; index++) {
+                        int number = board[column][row].hint[index];
+                        if (number != 0) {
+                            int columnStart = column - (column % 3);
+                            int rowStart = row - (row % 3);
+
+                            boolean isOnlyOne = true;
+                            out: for (int subCol = columnStart; subCol < columnStart + 3; subCol++) {
+                                for (int subRow = rowStart; subRow < rowStart + 3; subRow++) {
+                                    if (column != subCol && row != subRow) {
+                                        for (int subIndex = 0; subIndex < board[subCol][subRow].hint.length; subIndex++) {
+                                            if (number == board[subCol][subRow].hint[subIndex]) {
+                                                isOnlyOne = false;
+                                                break out;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (isOnlyOne) {
+                                board[column][row].answer = number;
+                                board[column][row].isFixed = true;
+                                updateHint();
+                                result = false;
+                                continue;
+                            }
+//                            isOnlyOne = true;
+//
+//                            for (int subRow = 0; subRow < BOARD_ROW; subRow++) {
+//                            }
+//
+//                            if (isOnlyOne) {
+//                                board[column][row].answer = number;
+//                                board[column][row].isFixed = true;
+//                                updateHint();
+//                                continue;
+//                            }
                         }
                     }
                 }
