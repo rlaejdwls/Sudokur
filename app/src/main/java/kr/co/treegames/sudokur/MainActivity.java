@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                             boolean isOnlyOne = true;
                             out: for (int subCol = columnStart; subCol < columnStart + 3; subCol++) {
                                 for (int subRow = rowStart; subRow < rowStart + 3; subRow++) {
-                                    if (column != subCol && row != subRow) {
+                                    if (!board[subCol][subRow].isFixed && column != subCol && row != subRow) {
                                         for (int subIndex = 0; subIndex < board[subCol][subRow].hint.length; subIndex++) {
                                             if (number == board[subCol][subRow].hint[subIndex]) {
                                                 isOnlyOne = false;
