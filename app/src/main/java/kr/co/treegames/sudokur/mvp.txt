@@ -1,0 +1,51 @@
+├data
+│ ├cache
+│ │ └TweetCache.java
+│ ├entity
+│ │ └mapper
+│ │   └TwitterUserMapper.java
+│ ├exception
+│ │ └NetworkConnectionException.java
+│ ├executor
+│ │ └JobExecutor.java
+│ └repository
+│   └TweetRepositoryImpl.java
+├domain
+│ ├exception
+│ │ └ErrorBundle.java
+│ ├executor
+│ │ └ThreadExecutor.java
+│ ├model
+│ │ └Tweet.java
+│ ├repository
+│ │ └TweetRepository.java
+│ └usecase
+│   └GetTweetListUseCase.java
+│
+├presentation
+│ ├di
+│ │ ├component
+│ │ ├module
+│ │ │ ├ActivityModule.java
+│ │ │ ├ApplicationModule.java
+│ │ │ └TweetModule.java
+│ │ ├HasComponent.java
+│ │ └PerActivity.java
+│ ├presenter
+│ │ ├Presenter.java
+│ │ └TweetListPresenter.java
+│ ├Service
+│ │ └GcmService.java
+│ └view
+│   ├activity
+│   │ └TweetListActivity.java
+│   ├adapter
+│   │ └TweetsAdapter.java
+│   ├component
+│   │ └ProfileHeaderView.java
+│   ├fragment
+│   │ └TweetListFragment.java
+│   └util
+│     └DateUtil.java
+│
+└MainApplication.java

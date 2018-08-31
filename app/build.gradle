@@ -1,23 +1,72 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdkVersion.toInteger()
+    flavorDimensions "sudokur"
+
     defaultConfig {
         applicationId "kr.co.treegames.sudokur"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.minSdkVersion.toInteger()
+        targetSdkVersion rootProject.targetSdkVersion.toInteger()
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
         release {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            storeFile file(properties.getProperty('storeFile'))
+            storePassword properties.getProperty('storePassword')
+            keyAlias properties.getProperty('keyAlias')
+            keyPassword properties.getProperty('keyPassword')
+        }
+    }
+    buildTypes {
+        debug {
+            debuggable true
+
+            buildConfigField "boolean", "CRASHLYTIS", "true"
+            buildConfigField "boolean", "ANALYTICS", "true"
+            buildConfigField "boolean", "PERFORMANCE", "true"
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
+            zipAlignEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "CRASHLYTIS", "true"
+            buildConfigField "boolean", "ANALYTICS", "true"
+            buildConfigField "boolean", "PERFORMANCE", "true"
+        }
+    }
+    productFlavors {
+        //Tigris Flavors
+        sudokur {
+            dimension "sudokur"
+            manifestPlaceholders = [ appLabel: "@string/app_title" ]
+        }
+        beta {
+            dimension "sudokur"
+            applicationIdSuffix ".beta"
+            manifestPlaceholders = [ appLabel: "@string/app_title" ]
+        }
+    }
+    android.variantFilter { variant ->
+        if((variant.buildType.name == 'release' && variant.getFlavors().get(0).name == 'beta')) {
+            variant.setIgnore(true)
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${variant.productFlavors[0].name}-${variant.versionName}-" +
+                    "${variant.versionCode}-${variant.variantData.variantConfiguration.buildType.name}.apk"
         }
     }
     compileOptions {
@@ -28,10 +77,26 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation project(':core')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //Test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //Support
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.google.android:flexbox:0.3.2'
+    //Google
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-perf:16.1.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 }
+
+apply plugin: 'com.google.gms.google-services'

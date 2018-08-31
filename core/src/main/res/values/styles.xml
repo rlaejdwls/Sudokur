@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="dialog_lime_orange" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- 버튼 색상 -->
+        <item name="colorAccent">#3F51B5</item>
+        <!-- 제목과 내용 색상 -->
+        <!--<item name="android:textColorPrimary">@android:color/white</item>-->
+        <!-- 바탕 -->
+        <!--<item name="android:windowBackground">@drawable/background_dialog</item>-->
+    </style>
+</resources>

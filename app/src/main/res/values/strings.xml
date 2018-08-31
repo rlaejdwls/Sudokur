@@ -2,4 +2,12 @@
     <string name="app_name">Sudokur</string>
 
     <string name="btn_thinking">Thinking</string>
+    <string name="btn_exception">Exception</string>
+    <string name="btn_crash">Crash</string>
+    <string name="btn_test">Test</string>
+    <string name="btn_remote_config">Remote Config</string>
+    <string name="btn_analytics">Analytics</string>
+    <string name="btn_authentication">Authentication</string>
+
+    <string name="txt_welcome_to_firebase">Welcome to Firebase</string>
 </resources>
