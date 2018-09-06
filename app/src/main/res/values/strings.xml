@@ -8,6 +8,9 @@
     <string name="btn_remote_config">Remote Config</string>
     <string name="btn_analytics">Analytics</string>
     <string name="btn_authentication">Authentication</string>
+    <string name="btn_ml_kit_ocr">MK Kit(OCR)</string>
+    <string name="btn_ml_kit_landmark">ML Kit(Landmark)</string>
+    <string name="btn_test_data_clear">Data Clear</string>
 
     <string name="txt_welcome_to_firebase">Welcome to Firebase</string>
 </resources>

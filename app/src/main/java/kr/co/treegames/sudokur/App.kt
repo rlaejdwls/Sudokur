@@ -13,6 +13,16 @@ import kr.co.treegames.core.manage.Logger
  * Description :
  */
 class App : AppCore() {
+    companion object {
+        private lateinit var appCore: AppCore
+
+        fun get(): AppCore {
+            return appCore
+        }
+    }
+    init {
+        appCore = this
+    }
     override fun onCreate() {
         super.onCreate()
         initialize()

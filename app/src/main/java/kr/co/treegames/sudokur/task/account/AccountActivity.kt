@@ -1,4 +1,4 @@
-package kr.co.treegames.sudokur.task.splash
+package kr.co.treegames.sudokur.task.account
 
 import android.os.Bundle
 import kr.co.treegames.sudokur.Injection
@@ -8,24 +8,23 @@ import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.replaceFragmentInActivity
 
 /**
- * Created by Hwang on 2018-08-31.
+ * Created by Hwang on 2018-09-03.
  *
  * Description :
  */
-
-class SplashActivity: DefaultActivity() {
-    private lateinit var presenter: SplashContract.Presenter
+class AccountActivity: DefaultActivity() {
+    private lateinit var presenter: AccountPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_account)
 
-        val fragment = supportFragmentManager.findFragmentById(R.id.content) as SplashFragment?
-                ?: DefaultFragment.create(SplashFragment::class.java).also {
+        val fragment: AccountFragment = supportFragmentManager.findFragmentById(R.id.content) as AccountFragment? ?:
+                DefaultFragment.create(AccountFragment::class.java).also {
                     replaceFragmentInActivity(it, R.id.content)
                 }
 
-        presenter = SplashPresenter(
+        presenter = AccountPresenter(
                 Injection.provideSharedPreferences(applicationContext),
                 Injection.provideAccountRepository(),
                 fragment

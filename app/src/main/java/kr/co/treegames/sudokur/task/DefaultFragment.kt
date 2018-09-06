@@ -1,4 +1,4 @@
-package kr.co.treegames.sudokur
+package kr.co.treegames.sudokur.task
 
 import android.content.res.Resources
 import android.os.Build
@@ -20,9 +20,11 @@ open class DefaultFragment : Fragment() {
         fun <T: DefaultFragment> create(clazz: Class<T>): T {
             return clazz.newInstance()
         }
-        fun <T: DefaultFragment> create(clazz: Class<T>, params: Bundle): T? {
+        fun <T: DefaultFragment> create(clazz: Class<T>, params: Bundle?): T? {
             val fragment: T? = clazz.newInstance()
-            fragment?.arguments = params
+            params?.let {
+                fragment?.arguments
+            }
             return fragment
         }
     }
