@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sudokur</string>
 
@@ -11,6 +12,10 @@
     <string name="btn_ml_kit_ocr">MK Kit(OCR)</string>
     <string name="btn_ml_kit_landmark">ML Kit(Landmark)</string>
     <string name="btn_test_data_clear">Data Clear</string>
+    <string name="btn_start_camera">Start Camera</string>
+    <string name="btn_detect_shape">Detect Shape</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="btn_sign_up">Sign Up</string>
 
     <string name="txt_welcome_to_firebase">Welcome to Firebase</string>
 </resources>

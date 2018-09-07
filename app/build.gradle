@@ -15,6 +15,11 @@ android {
         versionCode 1
         versionName "0.0.01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+            }
+        }
     }
     signingConfigs {
         release {
@@ -44,6 +49,11 @@ android {
             buildConfigField "boolean", "CRASHLYTIS", "true"
             buildConfigField "boolean", "ANALYTICS", "false"
             buildConfigField "boolean", "PERFORMANCE", "true"
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
         }
     }
     productFlavors {
@@ -78,8 +88,11 @@ androidExtensions {
     experimental = true
 }
 dependencies {
+    //Local
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':core')
+    implementation project(':openCVLibrary342')
+    //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //Test
     testImplementation 'junit:junit:4.12'

@@ -19,8 +19,8 @@ class AccountActivity: DefaultActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
 
-        val fragment: AccountFragment = supportFragmentManager.findFragmentById(R.id.content) as AccountFragment? ?:
-                DefaultFragment.create(AccountFragment::class.java).also {
+        val fragment: AccountFragment = supportFragmentManager.findFragmentById(R.id.content) as AccountFragment?
+                ?: DefaultFragment.create(AccountFragment::class.java).also {
                     replaceFragmentInActivity(it, R.id.content)
                 }
 

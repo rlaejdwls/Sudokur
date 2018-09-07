@@ -1,9 +1,9 @@
 package kr.co.treegames.sudokur.task.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import kr.co.treegames.sudokur.Injection
 import kr.co.treegames.sudokur.R
+import kr.co.treegames.sudokur.task.DefaultActivity
 import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.replaceFragmentInActivity
 import kr.co.treegames.sudokur.task.setToolbar
@@ -13,7 +13,7 @@ import kr.co.treegames.sudokur.task.setToolbar
  *
  * Description :
  */
-class MainActivity: AppCompatActivity() {
+class MainActivity: DefaultActivity() {
     private lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

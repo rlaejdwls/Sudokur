@@ -1,5 +1,6 @@
 package kr.co.treegames.sudokur.task.main
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -15,7 +16,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kr.co.treegames.core.manage.Logger
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.task.DefaultFragment
-
+import kr.co.treegames.sudokur.task.camera.CameraActivity
+import org.opencv.android.Utils
+import org.opencv.core.Mat
 
 
 /**
@@ -78,6 +81,28 @@ class MainFragment: DefaultFragment(), MainContract.View {
                 img_test_data.setImageDrawable(null)
                 txt_test_data.text = ""
             }
+            R.id.btn_start_camera -> {
+                startActivity(Intent(activity, CameraActivity::class.java))
+            }
+            R.id.btn_detect_shape -> {
+                progress_bar.visibility = View.VISIBLE
+                img_test_data.visibility = View.VISIBLE
+                img_test_data.setImageDrawable(resources?.getDrawable(R.drawable.test_img_open_cv_detect_example_shape, null))
+                val input: Mat = Utils.loadResource(activity, R.drawable.test_img_open_cv_detect_example_shape)
+                Thread {
+                    presenter.detectShape(input, {                        val bitmap: Bitmap = Bitmap.createBitmap(it.cols(), it.rows(), Bitmap.Config.ARGB_8888)
+                        Utils.matToBitmap(it, bitmap)
+                        with(Handler(Looper.getMainLooper())) {
+                            post {
+                                progress_bar.visibility = View.GONE
+                                img_test_data.setImageBitmap(bitmap)
+                            }
+                        }
+                    }, {
+                        showMessage("Detect fail")
+                    })
+                }.start()
+            }
         }
     }
 
@@ -86,6 +111,8 @@ class MainFragment: DefaultFragment(), MainContract.View {
         btn_ml_kit_ocr.setOnClickListener(onClick)
         btn_ml_kit_landmark.setOnClickListener(onClick)
         btn_test_data_clear.setOnClickListener(onClick)
+        btn_start_camera.setOnClickListener(onClick)
+        btn_detect_shape.setOnClickListener(onClick)
     }
     override fun onResume() {
         super.onResume()
