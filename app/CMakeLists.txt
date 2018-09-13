@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(pathOPENCV ${CMAKE_CURRENT_SOURCE_DIR}/../../common/OpenCV-android-sdk)
+set(pathOPENCV ${CMAKE_CURRENT_SOURCE_DIR}/../common/OpenCV-android-sdk)
 set(pathPROJECT ${CMAKE_CURRENT_SOURCE_DIR})
 set(pathLIBOPENCV_JAVA ${pathPROJECT}/src/main/JniLibs/${ANDROID_ABI}/libopencv_java3.so)
 
