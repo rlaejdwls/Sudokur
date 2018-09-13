@@ -1,11 +1,11 @@
 package org.opencv.samples.cameracalibration;
 
-import org.opencv.core.Mat;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+
+import org.opencv.core.Mat;
 
 public abstract class CalibrationResult {
     private static final String TAG = "OCVSample::CalibrationResult";

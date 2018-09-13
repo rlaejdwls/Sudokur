@@ -1,14 +1,13 @@
 package org.opencv.samples.puzzle15;
 
-import org.opencv.core.Core;
+import android.util.Log;
+
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
-
-import android.util.Log;
 
 
 /**
