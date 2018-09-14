@@ -87,10 +87,11 @@ class MainFragment: DefaultFragment(), MainContract.View {
             R.id.btn_detect_shape -> {
                 progress_bar.visibility = View.VISIBLE
                 img_test_data.visibility = View.VISIBLE
-                img_test_data.setImageDrawable(resources?.getDrawable(R.drawable.test_img_open_cv_detect_example_shape, null))
-                val input: Mat = Utils.loadResource(activity, R.drawable.test_img_open_cv_detect_example_shape)
+                img_test_data.setImageDrawable(resources.getDrawable(R.drawable.test_img_open_cv_detect_example_sudoku, null))
+                val input: Mat = Utils.loadResource(activity, R.drawable.test_img_open_cv_detect_example_sudoku)
                 Thread {
-                    presenter.detectShape(input, {                        val bitmap: Bitmap = Bitmap.createBitmap(it.cols(), it.rows(), Bitmap.Config.ARGB_8888)
+                    presenter.detectShape(input, {
+                        val bitmap: Bitmap = Bitmap.createBitmap(it.cols(), it.rows(), Bitmap.Config.ARGB_8888)
                         Utils.matToBitmap(it, bitmap)
                         with(Handler(Looper.getMainLooper())) {
                             post {
