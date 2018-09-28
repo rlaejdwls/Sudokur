@@ -4,7 +4,6 @@ import android.os.Bundle
 import kr.co.treegames.sudokur.Injection
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.task.DefaultActivity
-import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.replaceFragmentInActivity
 
 /**
@@ -20,7 +19,7 @@ class AccountActivity: DefaultActivity() {
         setContentView(R.layout.activity_account)
 
         val fragment: AccountFragment = supportFragmentManager.findFragmentById(R.id.content) as AccountFragment?
-                ?: DefaultFragment.create(AccountFragment::class.java).also {
+                ?: Injection.provideFragment(AccountFragment::class.java).also {
                     replaceFragmentInActivity(it, R.id.content)
                 }
 

@@ -16,18 +16,6 @@ import kr.co.treegames.core.util.StringUtils
  * Description :
  */
 open class DefaultFragment : Fragment() {
-    companion object {
-        fun <T: DefaultFragment> create(clazz: Class<T>): T {
-            return clazz.newInstance()
-        }
-        fun <T: DefaultFragment> create(clazz: Class<T>, params: Bundle?): T? {
-            val fragment: T? = clazz.newInstance()
-            params?.let {
-                fragment?.arguments
-            }
-            return fragment
-        }
-    }
     fun getColor(@ColorRes id: Int, theme: Resources.Theme): Int? {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.resources?.getColor(id, theme)

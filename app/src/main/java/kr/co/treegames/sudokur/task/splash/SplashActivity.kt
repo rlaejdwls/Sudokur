@@ -4,7 +4,6 @@ import android.os.Bundle
 import kr.co.treegames.sudokur.Injection
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.task.DefaultActivity
-import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.replaceFragmentInActivity
 
 /**
@@ -21,7 +20,7 @@ class SplashActivity: DefaultActivity() {
         setContentView(R.layout.activity_splash)
 
         val fragment = supportFragmentManager.findFragmentById(R.id.content) as SplashFragment?
-                ?: DefaultFragment.create(SplashFragment::class.java).also {
+                ?: Injection.provideFragment(SplashFragment::class.java).also {
                     replaceFragmentInActivity(it, R.id.content)
                 }
 

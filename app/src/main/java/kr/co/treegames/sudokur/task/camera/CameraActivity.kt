@@ -2,9 +2,9 @@ package kr.co.treegames.sudokur.task.camera
 
 import android.os.Bundle
 import android.view.WindowManager
+import kr.co.treegames.sudokur.Injection
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.task.DefaultActivity
-import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.replaceFragmentInActivity
 
 /**
@@ -24,7 +24,7 @@ class CameraActivity: DefaultActivity() {
         setContentView(R.layout.activity_camera)
 
         val fragment: CameraFragment = supportFragmentManager.findFragmentById(R.id.content) as CameraFragment?
-                ?: DefaultFragment.create(CameraFragment::class.java).also {
+                ?: Injection.provideFragment(CameraFragment::class.java).also {
                     replaceFragmentInActivity(it, R.id.content)
                 }
 

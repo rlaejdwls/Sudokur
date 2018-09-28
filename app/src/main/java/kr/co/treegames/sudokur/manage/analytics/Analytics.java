@@ -32,7 +32,7 @@ public class Analytics {
                 return;
             }
             FirebaseAnalytics.getInstance(builder.context)
-                    .logEvent("TESTEvent" + builder.event, builder.param);
+                    .logEvent("DEBUGEvent" + builder.event, builder.param);
         }
     }
     public static class Builder {
