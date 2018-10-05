@@ -21,13 +21,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/app_theme"
         android:name=".App">
 
         <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
         <meta-data android:name="com.google.firebase.ml.vision.DEPENDENCIES" android:value="ocr" />
 
-        <activity android:name=".task.splash.SplashActivity">
+        <activity
+            android:name=".task.splash.SplashActivity"
+            android:theme="@style/app_theme.full_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +37,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".task.account.AccountActivity" />
-        <activity android:name=".task.main.MainActivity" />
+        <activity android:name=".task.main.MainActivity">
+            <!--
+             * Android Deep Links Example
+             * Lint 표시 거슬려서 예시로 넣어둠
+             * 참고 : https://developer.android.com/training/app-links/deep-linking
+            -->
+            <intent-filter>
+                <!-- Sets the intent action to view the activity -->
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Allows the link to be opened from a web browser -->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Allows the deep link to be used without specifying the app name -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- URI tutsplus://deeplink -->
+                <data android:scheme="tutsplus" android:host="deeplink"/>
+                <!-- URI http://www.mydeeplink.com -->
+                <data android:scheme="http" android:host="www.mydeeplink.com"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".task.camera.CameraActivity"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"/>

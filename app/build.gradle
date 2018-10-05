@@ -114,6 +114,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.4'
     implementation 'com.google.firebase:firebase-ml-vision:17.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    //Animation
+    implementation 'com.airbnb.android:lottie:2.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

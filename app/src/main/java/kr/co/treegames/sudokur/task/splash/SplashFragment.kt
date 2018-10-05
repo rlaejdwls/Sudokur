@@ -1,12 +1,13 @@
 package kr.co.treegames.sudokur.task.splash
 
+import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_account.*
+import kotlinx.android.synthetic.main.fragment_splash.*
 import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.account.AccountActivity
 import kr.co.treegames.sudokur.task.main.MainActivity
@@ -17,15 +18,22 @@ import kr.co.treegames.sudokur.task.main.MainActivity
  * Description :
  */
 class SplashFragment: DefaultFragment(), SplashContract.View {
-    companion object {
-        private const val SPLASH_MILLISECOND: Long = 500
-    }
-
     override lateinit var presenter: SplashContract.Presenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.automatic()
+        anim_logo.addAnimatorListener(object: Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator?) {
+            }
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+            override fun onAnimationEnd(p0: Animator?) {
+                presenter.automatic()
+            }
+        })
+        anim_logo.playAnimation()
     }
     override fun onResume() {
         super.onResume()
@@ -39,17 +47,13 @@ class SplashFragment: DefaultFragment(), SplashContract.View {
         Handler(Looper.getMainLooper()).post { Toast.makeText(activity, message, Toast.LENGTH_LONG).show() }
     }
     override fun startMainActivity() {
-        Handler().postDelayed({
-            startActivity(Intent(activity, MainActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-        }, SPLASH_MILLISECOND)
+        startActivity(Intent(activity, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
     override fun startAccountActivity() {
-        Handler().postDelayed({
-            startActivity(Intent(activity, AccountActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-        }, SPLASH_MILLISECOND)
+        startActivity(Intent(activity, AccountActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }

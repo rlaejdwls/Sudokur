@@ -1,6 +1,7 @@
 package kr.co.treegames.sudokur.task.splash
 
 import android.os.Bundle
+import android.view.WindowManager
 import kr.co.treegames.sudokur.Injection
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.task.DefaultActivity
@@ -17,6 +18,8 @@ class SplashActivity: DefaultActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
 
         val fragment = supportFragmentManager.findFragmentById(R.id.content) as SplashFragment?
