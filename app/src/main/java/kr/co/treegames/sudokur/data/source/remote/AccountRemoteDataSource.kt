@@ -1,6 +1,6 @@
 package kr.co.treegames.sudokur.data.source.remote
 
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import com.google.firebase.auth.FirebaseAuth
 import kr.co.treegames.sudokur.data.model.Account
 import kr.co.treegames.sudokur.data.model.User

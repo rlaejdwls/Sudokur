@@ -3,7 +3,7 @@ package kr.co.treegames.sudokur.data.source.io
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import kr.co.treegames.sudokur.data.model.Key
 import kr.co.treegames.sudokur.data.source.SharedPreferencesDataSource
 

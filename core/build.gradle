@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion.toInteger()
+    compileSdkVersion rootProject.compile_sdk_version.toInteger()
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion.toInteger()
-        targetSdkVersion rootProject.targetSdkVersion.toInteger()
+        minSdkVersion rootProject.min_sdk_version.toInteger()
+        targetSdkVersion rootProject.target_sdk_version.toInteger()
         versionCode 1
         versionName "1.0.10"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -24,11 +24,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
     //Support
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
     //JSON
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

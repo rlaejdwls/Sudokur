@@ -1,4 +1,4 @@
-package co.example.core;
+package kr.co.treegames.core;
 
 import org.junit.Test;
 

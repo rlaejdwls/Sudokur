@@ -10,7 +10,7 @@ import android.media.ImageReader
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView

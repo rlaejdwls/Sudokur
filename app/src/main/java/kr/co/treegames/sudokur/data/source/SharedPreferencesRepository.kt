@@ -1,6 +1,6 @@
 package kr.co.treegames.sudokur.data.source
 
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import kr.co.treegames.sudokur.data.source.io.SharedPreferencesLocalDataSource
 
 /**
