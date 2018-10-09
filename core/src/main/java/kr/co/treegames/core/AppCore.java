@@ -2,10 +2,6 @@ package kr.co.treegames.core;
 
 import android.app.Activity;
 import android.app.Application;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
@@ -14,6 +10,10 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import kr.co.treegames.core.manage.Debugger;
 import kr.co.treegames.core.manage.ExceptionHandler;
 
@@ -22,6 +22,7 @@ public class AppCore extends Application implements LifecycleObserver {
 
     private Point point = new Point();
     private float density;
+    private int statusBarHeight;
 
     public AppCore() {
         super();
@@ -56,6 +57,11 @@ public class AppCore extends Application implements LifecycleObserver {
             display.getSize(point);
             display.getMetrics(outMetrics);
             density = outMetrics.density;
+        }
+        statusBarHeight = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
         }
     }
     @Override
@@ -116,4 +122,5 @@ public class AppCore extends Application implements LifecycleObserver {
         return appCore.point.y;
     }
     public static float getDensity() { return appCore.density; }
+    public static int getStatusBarHeight() { return appCore.statusBarHeight; }
 }

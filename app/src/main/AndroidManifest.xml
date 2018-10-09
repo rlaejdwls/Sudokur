@@ -59,6 +59,7 @@
         <activity android:name=".task.camera.CameraActivity"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".task.board.BoardActivity" />
 
         <service
             android:exported="false"

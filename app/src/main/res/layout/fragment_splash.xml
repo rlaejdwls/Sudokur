@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_fileName="xiao_yu_bank_loading_animation.json"
-        app:lottie_repeatCount="3"/>
+        app:lottie_repeatCount="1"/>
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"

@@ -10,6 +10,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kr.co.treegames.sudokur.task.DefaultFragment
 import kr.co.treegames.sudokur.task.account.AccountActivity
+import kr.co.treegames.sudokur.task.board.BoardActivity
 import kr.co.treegames.sudokur.task.main.MainActivity
 
 /**
@@ -30,7 +31,8 @@ class SplashFragment: DefaultFragment(), SplashContract.View {
             override fun onAnimationCancel(p0: Animator?) {
             }
             override fun onAnimationEnd(p0: Animator?) {
-                presenter.automatic()
+//                presenter.automatic()
+                startBoardActivity()
             }
         })
         anim_logo.playAnimation()
@@ -50,10 +52,18 @@ class SplashFragment: DefaultFragment(), SplashContract.View {
         startActivity(Intent(activity, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
     override fun startAccountActivity() {
         startActivity(Intent(activity, AccountActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+    override fun startBoardActivity() {
+        startActivity(Intent(activity, BoardActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }
