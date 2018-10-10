@@ -1,5 +1,5 @@
 ## Sudokur
-
+ 스도쿠를 자동으로 풀어주는 
 ## Description
 
 <span style="color:red">some **This is Red Bold.** text</span>
