@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Message
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -13,7 +14,8 @@ import kr.co.treegames.core.AppCore
 import kr.co.treegames.sudokur.R
 import kr.co.treegames.sudokur.data.model.Data
 import kr.co.treegames.sudokur.task.DefaultFragment
-import kr.co.treegames.sudokur.task.board.widget.Cell
+import kr.co.treegames.sudokur.widget.dialog.bundle.progress.solving.SolveProgressUIHandler
+import kr.co.treegames.sudokur.widget.view.Cell
 
 class BoardFragment: DefaultFragment(), BoardContract.View {
     private val percentage: Float = 0.90f
@@ -21,6 +23,7 @@ class BoardFragment: DefaultFragment(), BoardContract.View {
     override lateinit var presenter: BoardContract.Presenter
 
     private val board = Array(9) { arrayOfNulls<Cell>(9) }
+    private lateinit var progressHandler: SolveProgressUIHandler
 
     private val onClick = fun(view: View) {
         when (view.id) {
@@ -37,6 +40,7 @@ class BoardFragment: DefaultFragment(), BoardContract.View {
         btn_clear.setOnClickListener(onClick)
 
         activity?.run {
+            progressHandler = SolveProgressUIHandler(this)
             val with: Float = AppCore.getScreenWidth().toFloat()
             val cellWith: Float = (with * percentage / 9) - 2
 
@@ -85,6 +89,14 @@ class BoardFragment: DefaultFragment(), BoardContract.View {
                     invalidate()
                 }
             }
+        }
+    }
+    override fun setLoadingIndicator(isShow: Boolean) {
+        activity?.run {
+            progressHandler.handleMessage(Message().apply {
+                what = if (isShow) { SolveProgressUIHandler.Status.SHOW.ordinal }
+                else { SolveProgressUIHandler.Status.DISMISS.ordinal }
+            })
         }
     }
     override fun showMessage(message: String) {

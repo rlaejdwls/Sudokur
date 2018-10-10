@@ -7,6 +7,7 @@ import kr.co.treegames.sudokur.task.BaseView
 interface BoardContract {
     interface View: BaseView<Presenter> {
         fun update(col: Int, row: Int, data: Data)
+        fun setLoadingIndicator(isShow: Boolean)
         fun showMessage(message: String)
     }
     interface Presenter: BasePresenter {

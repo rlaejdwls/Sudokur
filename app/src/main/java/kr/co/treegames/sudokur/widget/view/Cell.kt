@@ -1,4 +1,4 @@
-package kr.co.treegames.sudokur.task.board.widget
+package kr.co.treegames.sudokur.widget.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -25,10 +25,10 @@ class Cell(context: Context?) : AppCompatTextView(context) {
     private val start: PointF = PointF()
     private var action: ((col: Int, row: Int, number: Int) -> Unit)? = null
     private var isActionDown = false
+    private var preview: Int = -1
     var column: Int = -1
     var row: Int = -1
     var number: Int = -1
-    var preview: Int = -1
 
     private var popupView: View = LayoutInflater.from(context).inflate(R.layout.popup_select_number, null)
     private var popupWindow: PopupWindow
@@ -97,7 +97,7 @@ class Cell(context: Context?) : AppCompatTextView(context) {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     preview = getNumber(event)
-                    popupView.findViewById<TextView>(R.id.txt_select_number).text = (number + 1).toString()
+                    popupView.findViewById<TextView>(R.id.txt_select_number).text = (preview + 1).toString()
                     invalidate()
                 }
                 MotionEvent.ACTION_UP -> {

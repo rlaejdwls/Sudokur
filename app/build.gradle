@@ -14,7 +14,7 @@ android {
         minSdkVersion rootProject.min_sdk_version.toInteger()
         targetSdkVersion rootProject.target_sdk_version.toInteger()
         versionCode 1
-        versionName "0.1.01"
+        versionName "0.1.02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {

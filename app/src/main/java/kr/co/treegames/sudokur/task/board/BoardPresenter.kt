@@ -74,6 +74,7 @@ class BoardPresenter(val view: BoardContract.View)
         print()
     }
     override fun thinking() {
+        view.setLoadingIndicator(true)
         Thread {
             updateHint()
             while (true) {
@@ -81,6 +82,7 @@ class BoardPresenter(val view: BoardContract.View)
                 if (checkSuccess()) break
             }
             print()
+            view.setLoadingIndicator(false)
         }.start()
     }
 
@@ -222,7 +224,6 @@ class BoardPresenter(val view: BoardContract.View)
                 board[column][row]?.run {
                     view.update(column, row, this)
                 }
-//                line.append(if (board[column][row].isFixed) board[column][row].answer else " ").append(" ")
             }
         }
     }
