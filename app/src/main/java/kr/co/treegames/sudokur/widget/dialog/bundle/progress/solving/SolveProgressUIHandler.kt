@@ -23,8 +23,9 @@ class SolveProgressUIHandler(private val context: Context): Handler(Looper.getMa
                 progress?.run {
                     if (isShowing) { this.dismiss() }
                 }
-                progress = SolveProgressDialog(context)
-                progress!!.show()
+                progress = SolveProgressDialog(context).apply {
+                    show()
+                }
             }
             Status.DISMISS.ordinal -> {
                 progress?.run {

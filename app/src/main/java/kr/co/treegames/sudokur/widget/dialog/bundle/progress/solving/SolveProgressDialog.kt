@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.ViewGroup
-import com.airbnb.lottie.LottieAnimationView
+import android.view.WindowManager
 import com.airbnb.lottie.LottieDrawable
 import kotlinx.android.synthetic.main.dialog_solving_progress_bar.*
 import kr.co.treegames.sudokur.R
@@ -17,15 +17,13 @@ import kr.co.treegames.sudokur.R
  * Description :
  */
 class SolveProgressDialog(context: Context) : Dialog(context) {
-    private lateinit var progress: LottieAnimationView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.dialog_solving_progress_bar)
         window?.run {
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
-//        progress = findViewById(R.id.anim_progress)
         anim_progress.repeatCount = LottieDrawable.INFINITE
         anim_progress.playAnimation()
 
