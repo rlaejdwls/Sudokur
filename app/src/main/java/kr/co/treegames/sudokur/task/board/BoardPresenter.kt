@@ -3,9 +3,6 @@ package kr.co.treegames.sudokur.task.board
 import kr.co.treegames.sudokur.data.model.Data
 import java.util.concurrent.atomic.AtomicBoolean
 
-
-
-
 class BoardPresenter(val view: BoardContract.View)
     : BoardContract.Presenter {
     enum class LoopResult {
@@ -17,15 +14,15 @@ class BoardPresenter(val view: BoardContract.View)
 
     private val board = Array(9) { arrayOfNulls<Data>(9) }
     private var temp = arrayOf(
-            intArrayOf(0, 8, 0, 0, 0, 0, 2, 0, 0),
-            intArrayOf(0, 1, 2, 0, 8, 0, 0, 3, 4),
-            intArrayOf(0, 3, 6, 2, 5, 9, 0, 1, 0),
-            intArrayOf(0, 9, 0, 8, 0, 0, 0, 0, 5),
-            intArrayOf(0, 0, 0, 5, 3, 6, 0, 0, 0),
-            intArrayOf(1, 0, 0, 0, 0, 4, 0, 8, 0),
-            intArrayOf(0, 6, 0, 4, 9, 8, 3, 5, 0),
-            intArrayOf(3, 5, 0, 0, 6, 0, 1, 4, 0),
-            intArrayOf(0, 0, 4, 0, 0, 0, 0, 6, 0)
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
     )
 
     init {
@@ -44,7 +41,7 @@ class BoardPresenter(val view: BoardContract.View)
             hint = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
         }
     }
-    override fun rollback() {
+    override fun sample() {
         temp = arrayOf(
                 intArrayOf(0, 8, 0, 0, 0, 0, 2, 0, 0),
                 intArrayOf(0, 1, 2, 0, 8, 0, 0, 3, 4),
@@ -78,6 +75,7 @@ class BoardPresenter(val view: BoardContract.View)
     }
     override fun thinking() {
         Thread {
+            updateHint()
             while (true) {
                 if (algorithmOnlyOneInsideBoard() && algorithmOnlyOneInsideBlock()) break
                 if (checkSuccess()) break

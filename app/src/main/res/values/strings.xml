@@ -16,6 +16,9 @@
     <string name="btn_detect_shape">Detect Shape</string>
     <string name="btn_sign_in">Sign In</string>
     <string name="btn_sign_up">Sign Up</string>
+    <string name="btn_sample">Sample</string>
+    <string name="btn_action">Action</string>
+    <string name="btn_clear">Clear</string>
 
     <string name="txt_welcome_to_firebase">Welcome to Firebase</string>
 </resources>

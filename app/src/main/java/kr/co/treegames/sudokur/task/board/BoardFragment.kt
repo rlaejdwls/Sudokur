@@ -24,7 +24,7 @@ class BoardFragment: DefaultFragment(), BoardContract.View {
 
     private val onClick = fun(view: View) {
         when (view.id) {
-            R.id.btn_sample -> presenter.rollback()
+            R.id.btn_sample -> presenter.sample()
             R.id.btn_action -> presenter.thinking()
             R.id.btn_clear -> presenter.clear()
         }
@@ -48,6 +48,9 @@ class BoardFragment: DefaultFragment(), BoardContract.View {
                 layout_column.gravity = Gravity.CENTER
                 for (row in 0..8) {
                     val cell = Cell(this)
+                    cell.column = col
+                    cell.row = row
+                    cell.setOnNumberChangeListener { col, row, number -> presenter.update(col, row, number) }
                     cell.layoutParams = LinearLayout.LayoutParams(cellWith.toInt() - 1, cellWith.toInt() - 1).apply {
                         this.leftMargin = 1
                         this.rightMargin = 1

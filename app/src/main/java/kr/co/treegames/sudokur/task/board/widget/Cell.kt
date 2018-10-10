@@ -23,8 +23,12 @@ import kr.co.treegames.sudokur.R
  */
 class Cell(context: Context?) : AppCompatTextView(context) {
     private val start: PointF = PointF()
+    private var action: ((col: Int, row: Int, number: Int) -> Unit)? = null
     private var isActionDown = false
+    var column: Int = -1
+    var row: Int = -1
     var number: Int = -1
+    var preview: Int = -1
 
     private var popupView: View = LayoutInflater.from(context).inflate(R.layout.popup_select_number, null)
     private var popupWindow: PopupWindow
@@ -40,6 +44,9 @@ class Cell(context: Context?) : AppCompatTextView(context) {
         color = Color.argb(160, 255, 0, 0)
     }
 
+    fun setOnNumberChangeListener(action: ((col: Int, row: Int, number: Int) -> Unit)?) {
+        this.action = action
+    }
     private fun getAngle(dx: Double, dy: Double): Double {
         return Math.atan2(dy, dx) * (180.0/Math.PI)
     }
@@ -79,7 +86,7 @@ class Cell(context: Context?) : AppCompatTextView(context) {
                 MotionEvent.ACTION_DOWN -> {
                     start.x = event.x
                     start.y = event.y
-                    number = 4
+                    preview = 4
                     isActionDown = true
                     if (popupWindow.isShowing) {
                         popupWindow.dismiss()
@@ -89,12 +96,17 @@ class Cell(context: Context?) : AppCompatTextView(context) {
                     return true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    number = getNumber(event)
+                    preview = getNumber(event)
                     popupView.findViewById<TextView>(R.id.txt_select_number).text = (number + 1).toString()
                     invalidate()
                 }
                 MotionEvent.ACTION_UP -> {
-                    number = getNumber(event)
+                    if (preview != number) {
+                        number = getNumber(event)
+                        action?.invoke(column, row, number + 1)
+                    } else {
+                        number = getNumber(event)
+                    }
                     text = (number + 1).toString()
                     performClick()
                     isActionDown = false
@@ -116,8 +128,8 @@ class Cell(context: Context?) : AppCompatTextView(context) {
 
         canvas?.let {
             if (isActionDown) {
-                it.drawRect((width / 3.0f) * (number % 3), (height / 3.0f) * (number / 3),
-                        (width / 3.0f) * (number % 3 + 1), (height / 3.0f) * (number / 3 + 1), paint)
+                it.drawRect((width / 3.0f) * (preview % 3), (height / 3.0f) * (preview / 3),
+                        (width / 3.0f) * (preview % 3 + 1), (height / 3.0f) * (preview / 3 + 1), paint)
             }
         }
     }

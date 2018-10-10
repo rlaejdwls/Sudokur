@@ -11,7 +11,7 @@ interface BoardContract {
     }
     interface Presenter: BasePresenter {
         fun update(col: Int, row: Int, number: Int)
-        fun rollback()
+        fun sample()
         fun thinking()
         fun clear()
     }
